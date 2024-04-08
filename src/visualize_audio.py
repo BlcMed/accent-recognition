@@ -1,14 +1,15 @@
 import matplotlib.pyplot as plt
 import librosa
 
-# Plot the audio waveform
-def plot_waveform(y, sr):
+
+def plot_waveform(waveform, sr):
     plt.figure(figsize=(10, 4))
-    librosa.display.waveshow(y, sr=sr, color="blue")
+    librosa.display.waveshow(y=waveform, sr=sr, color="blue")
     plt.xlabel("Time (s)")
     plt.ylabel("Amplitude")
     plt.title("Waveform")
     plt.show()
+
 
 def plot_spectrogram(spectrogram):
     plt.figure(figsize=(10, 4))
@@ -17,12 +18,14 @@ def plot_spectrogram(spectrogram):
     plt.title("Spectrogram")
     plt.show()
 
+
 def plot_mel_spectrogram(mel_spectrogram):
     plt.figure(figsize=(10, 4))
     librosa.display.specshow(mel_spectrogram, x_axis="time", y_axis="mel")
     plt.colorbar()
     plt.title("Mel Spectrogram")
     plt.show()
+
 
 def plot_mfcc(mfcc):
     plt.figure(figsize=(10, 4))
