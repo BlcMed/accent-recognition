@@ -2,11 +2,6 @@ import numpy as np
 import librosa
 
 
-frame_lenght = 2048
-hop_length = 512
-n_mfcc = 13
-
-
 def compute_spectrogram(audio):
     # Compute Short Time Fourier Transform
     D = librosa.stft(y=audio)
@@ -22,8 +17,21 @@ def compute_mel_spectrogram(audio, sr):
     return mel_spectrogram
 
 
-def compute_mfcc(audio, sr, n_mfcc=n_mfcc):
-    mfcc = librosa.feature.mfcc(y=audio, sr=sr, n_mfcc=n_mfcc)
+def compute_mfcc(
+    audio, sr, n_mfcc, duration=0.025, overlap=0.010
+):  # duration=25ms, overlap=10ms
+
+    # Convert duration and overlap from seconds to samples
+    frame_length = int(sr * duration)
+    hop_length = int(sr * overlap)
+
+    # Calculate n_fft (next power of 2 of frame_length) for FFT to ensure efficient FFT computation
+    n_fft = 2 ** (frame_length - 1).bit_length()
+
+    # Compute MFCC
+    mfcc = librosa.feature.mfcc(
+        y=audio, sr=sr, n_mfcc=n_mfcc, n_fft=n_fft, hop_length=hop_length
+    )
     return mfcc
 
 
