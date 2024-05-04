@@ -1,7 +1,5 @@
 import os
 import librosa
-from extract_features import compute_mfcc
-import numpy as np
 
 
 # Load Audio files_with labels
