@@ -2,7 +2,7 @@
 
 ## Data source
 
-Data is collected from Accent Speech Archive
+Weinberger, Steven. (2015). Speech Accent Archive. George Mason University. Retrieved from http://accent.gmu.edu 
 
 ## Dependencies
 
