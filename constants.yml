@@ -1,0 +1,11 @@
+
+SAMPLING_RATING : 22050
+FRAME_LENGTH_ENERGY : 2048  # 512
+THRESHOLD_PERCENTAGE : 0.01  # percentage of max energy
+MIN_SILENCE_DURATION : 1  # in seconds
+
+# n_fft=512 # the window size
+HOP_LENGTH : 512  # the number of samples between successive frames
+SEGMENT_DURATION : 0.025  # in seceonds
+SEGMENT_OVERLAP : 0.01  # in seceonds
+N_MFCC : 13
