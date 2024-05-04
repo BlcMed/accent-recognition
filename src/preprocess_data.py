@@ -1,10 +1,9 @@
-import os
 import librosa
 
 
 def split_audio_by_silence(
     audio,
-    sr,
+    sampling_rating,
     threshold_percentage,
     min_silence_duration,
     frame_length_energy,
@@ -23,7 +22,7 @@ def split_audio_by_silence(
     # Identify split points
     split_points = []  # for silent parts
     start_point = None
-    min_silence_samples = min_silence_duration * sr
+    min_silence_samples = min_silence_duration * sampling_rating
     for i, silent_frame in enumerate(silent_frames):
         current_sample = i * hop_length
         if silent_frame:
@@ -60,20 +59,6 @@ def split_audio_by_silence(
     # Each array contains the audio samples of a segment of the original audio file where sound is present
     return audible_segments
 
-
-def split_all_audios_by_silence(audio_data, labels, sampling_rating, threshold_percentage, min_silence_duration):
-    audio_data_trimmed = []
-    labels_trimmed = []
-    for i, audio in enumerate(audio_data):
-        audible_segments = split_audio_by_silence(
-            audio,
-            sampling_rating,
-            threshold_percentage=threshold_percentage,
-            min_silence_duration=min_silence_duration,
-        )
-        audio_data_trimmed.extend(audible_segments)
-        labels_trimmed.extend([labels[i]] * len(audible_segments))
-    return audio_data_trimmed, labels_trimmed
 
 # Segment Audio into smaller chunks
 def segment_audio(
