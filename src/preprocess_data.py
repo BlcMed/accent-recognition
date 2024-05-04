@@ -5,10 +5,10 @@ import librosa
 def split_audio_by_silence(
     audio,
     sr,
-    threshold_percentage=0.01,
-    min_silence_duration=1,
-    frame_length_energy=2048,
-    hop_length=512,
+    threshold_percentage,
+    min_silence_duration,
+    frame_length_energy,
+    hop_length,
 ):
     # Compute energy of audio frames
     energy = librosa.feature.rms(

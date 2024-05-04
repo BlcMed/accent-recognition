@@ -1,5 +1,6 @@
 import os
 import librosa
+import pandas as pd
 
 # Load Audio files_with labels
 def load_audio_files(folder_path, sr):
@@ -16,11 +17,14 @@ def load_audio_files(folder_path, sr):
         label = file.split(".")[0]
         # Remove the number
         label = "".join([i for i in label if not i.isdigit()])
-        labels.append(label)
-    return audio_data, labels
+        labels.append(label) 
+        df = pd.DataFrame({'audio': audio_data, 'Labels': labels})
+    return df
+    #return audio_data, labels
 
 
-def filter_data_based_on_accents(labels, audio_data, considered_accents):
+
+def filter_data_based_on_accents(audio_data, labels, considered_accents):
     audio_data_filtered=[]
     labels_filtered=[]
     for i,audio in enumerate(audio_data):
