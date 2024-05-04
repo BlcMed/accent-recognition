@@ -18,3 +18,13 @@ def load_audio_files(folder_path, sr):
         label = "".join([i for i in label if not i.isdigit()])
         labels.append(label)
     return audio_data, labels
+
+
+def filter_data_based_on_accents(labels, audio_data, considered_accents):
+    audio_data_filtered=[]
+    labels_filtered=[]
+    for i,audio in enumerate(audio_data):
+        if labels[i] in considered_accents:
+            audio_data_filtered.append(audio)
+            labels_filtered.append(labels[i])
+    return audio_data_filtered, labels_filtered

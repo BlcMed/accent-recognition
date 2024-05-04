@@ -61,6 +61,20 @@ def split_audio_by_silence(
     return audible_segments
 
 
+def split_all_audios_by_silence(audio_data, labels, sampling_rating, threshold_percentage, min_silence_duration):
+    audio_data_trimmed = []
+    labels_trimmed = []
+    for i, audio in enumerate(audio_data):
+        audible_segments = split_audio_by_silence(
+            audio,
+            sampling_rating,
+            threshold_percentage=threshold_percentage,
+            min_silence_duration=min_silence_duration,
+        )
+        audio_data_trimmed.extend(audible_segments)
+        labels_trimmed.extend([labels[i]] * len(audible_segments))
+    return audio_data_trimmed, labels_trimmed
+
 # Segment Audio into smaller chunks
 def segment_audio(
     audio, sr, duration=0.025, overlap=0.010
@@ -83,3 +97,4 @@ def segment_audio(
         segment = audio[start:end]
         segments.append(segment)
     return segments
+
