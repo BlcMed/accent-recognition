@@ -13,26 +13,35 @@ class MfccTransformer(BaseEstimator, TransformerMixin):
         overlap
     ):
         self.variables = variables
-        self.sampling_rating=sampling_rating, 
-        self.n_mfcc=n_mfcc,
-        self.duration=duration,
+        self.sampling_rating=sampling_rating 
+        self.n_mfcc=n_mfcc
+        self.duration=duration
         self.overlap=overlap
 
     def fit(self, X: pd.DataFrame, y=None):
         audio_data = X["audio"]
-        self.mfccs = []
+        self.mfccs = {}
+        for i in range(self.n_mfcc):
+            self.mfccs[f"mfcc_{i+1}"] = []
         for audio in audio_data:
             mfcc = compute_mfcc(
-                audio,
-                self.sampling_rating, 
-                self.n_mfcc, 
-                self.duration, 
-                self.overlap
+                audio=audio,
+                sampling_rating=self.sampling_rating,
+                n_mfcc=self.n_mfcc,
+                duration=self.duration,
+                overlap=self.overlap
             )
-        self.mfccs.append(mfcc)
+            for i in range(self.n_mfcc):
+               self.mfccs[f"mfcc_{i+1}"].append(mfcc[i])
+            #self.mfccs.append(mfcc)
         return self
     
     def transform(self, X: pd.DataFrame) -> pd.DataFrame:
         X=X.copy()
-        X["mfcc"]=self.mfccs
+        for i in range(self.n_mfcc):
+            X[f"mfcc_{i+1}"]=self.mfccs[f"mfcc_{i}"]
+        #X["mfcc"]=self.mfccs
         return X
+
+if __name__=="__main__":
+    print("i am in mfcc transformer")
