@@ -30,7 +30,7 @@ def compute_mfcc(
 
     # Compute MFCC
     mfcc = librosa.feature.mfcc(
-        y=audio, sampling_rating=sampling_rating, n_mfcc=n_mfcc, n_fft=n_fft, hop_length=hop_length
+        y=audio,sr=sampling_rating, n_mfcc=n_mfcc, n_fft=n_fft, hop_length=hop_length
     )
     return mfcc
 
