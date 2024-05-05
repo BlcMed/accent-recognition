@@ -1,6 +1,8 @@
 import os
 import librosa
 import pandas as pd
+import joblib
+from sklearn.pipeline import Pipeline
 
 # Load Audio files_with labels
 def load_audio_files(folder_path, sr):
@@ -36,12 +38,14 @@ def filter_data_based_on_accents(df, considered_accents):
     return df
 
 
-'''
-def filter_data_based_on_accents(audio_data, labels, considered_accents):
-    audio_data_filtered=[]
-    labels_filtered=[]
-    for i,audio in enumerate(audio_data):
-        if labels[i] in considered_accents:
-            audio_data_filtered.append(audio)
-            labels_filtered.append(labels[i])
-    return audio_data_filtered, labels_filtered'''
+
+def save_pipeline(*, pipeline: Pipeline):
+    save_file_name = ".pkl"
+    save_path = " " / save_file_name
+    joblib.dump(pipeline, save_path)
+
+
+def load_pipeline(*, file_name: str) -> Pipeline:
+    file_path = " "/ file_name
+    trained_model = joblib.load(filename=file_path)
+    return trained_model

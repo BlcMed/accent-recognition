@@ -7,14 +7,12 @@ class MfccTransformer(BaseEstimator, TransformerMixin):
     def __init__(
         self,
         variables: List[str],
-        audio,
         sampling_rating, 
         n_mfcc,
         duration,
         overlap
     ):
         self.variables = variables
-        self.audio=audio,
         self.sampling_rating=sampling_rating, 
         self.n_mfcc=n_mfcc,
         self.duration=duration,
@@ -34,7 +32,7 @@ class MfccTransformer(BaseEstimator, TransformerMixin):
         self.mfccs.append(mfcc)
         return self
     
-    def trasnform(self, X: pd.DataFrame) -> pd.DataFrame:
+    def transform(self, X: pd.DataFrame) -> pd.DataFrame:
         X=X.copy()
         X["mfcc"]=self.mfccs
         return X
