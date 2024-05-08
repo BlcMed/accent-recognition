@@ -4,7 +4,7 @@ import pandas as pd
 import joblib
 from sklearn.pipeline import Pipeline
 
-# Load Audio files_with labels
+
 def load_audio_files(folder_path, sr):
     audio_files = os.listdir(folder_path)
     audio_data = []
@@ -13,16 +13,18 @@ def load_audio_files(folder_path, sr):
         file_path = os.path.join(folder_path, file)
         audio, sr = librosa.load(file_path, sr=sr)
         audio_data.append(audio)
-        
-        # Extract label
-        # Remove the .mp3 extention
-        label = file.split(".")[0]
-        # Remove the number
-        label = "".join([i for i in label if not i.isdigit()])
+        label = extract_label(file)
         labels.append(label) 
         df = pd.DataFrame({'audio': audio_data, 'labels': labels})
     return df
-    #return audio_data, labels
+
+
+def extract_label(file):
+    # Remove the .mp3 extention
+    label = file.split(".")[0]
+    # Remove the number
+    label = "".join([i for i in label if not i.isdigit()])
+    return label
 
 
 def filter_data_based_on_accents(df, considered_accents):
@@ -36,7 +38,6 @@ def filter_data_based_on_accents(df, considered_accents):
             labels_filtered.append(labels[i])
     df = pd.DataFrame({'audio': audio_data_filtered, 'labels': labels_filtered})
     return df
-
 
 
 def save_pipeline(*, pipeline: Pipeline):
