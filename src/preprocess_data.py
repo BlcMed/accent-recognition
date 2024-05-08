@@ -1,6 +1,5 @@
 import librosa
 
-
 def split_audio_by_silence(
     audio,
     sampling_rating,
