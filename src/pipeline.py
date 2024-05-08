@@ -1,8 +1,7 @@
 from sklearn.pipeline import Pipeline
-from load_config import load_constants_from_yaml
-from split_silence_transformer import SplitSilenceTransformer
-from mfcc_transformer import MfccTransformer
-from expander_transformer import ExpanderTransformer
+from custom_transformers.split_silence_transformer import SplitSilenceTransformer
+from custom_transformers.mfcc_transformer import MfccTransformer
+from custom_transformers.expander_transformer import ExpanderTransformer
 
 
 def make_pipeline(sampling_rating,

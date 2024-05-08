@@ -27,7 +27,7 @@ def run_training():
                            
                            )
     df_transformed = pipeline.fit_transform(df)
-    df_transformed.to_csv('df_transformed.csv')
+    df_transformed.to_csv('data/processed/df_transformed.csv')
 
 
 if __name__ == "__main__":
