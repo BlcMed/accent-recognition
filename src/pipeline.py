@@ -28,7 +28,7 @@ def make_pipeline(sampling_rating,
                 duration=segment_duration,
                 overlap=segment_overlap)),
             
-            ("expander_transformer", ExpanderTransformer(n_mfcc=n_mfcc, variables_to_repeat=["labels"]))
+            ("expander_transformer", ExpanderTransformer(n_mfcc=n_mfcc, columns_to_remain=["labels"]))
         ]
     )
     return pipeline
