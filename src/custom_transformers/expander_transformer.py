@@ -2,32 +2,27 @@ import numpy as np
 import pandas as pd
 from sklearn.base import TransformerMixin, BaseEstimator
 
-import numpy as np
-import pandas as pd
-from sklearn.base import TransformerMixin, BaseEstimator
-
 class ExpanderTransformer(TransformerMixin, BaseEstimator):
     
-    def __init__(self, variables_to_repeat, n_mfcc):
+    def __init__(self, columns_to_remain, n_mfcc):
         columns_to_expand = []
         for i in range(n_mfcc):
             columns_to_expand.append(f"mfcc_{i+1}")
         self.columns_to_expand = columns_to_expand
-        self.variables_to_repeat = variables_to_repeat
+        self.columns_to_remain = columns_to_remain
 
     def fit(self, X, y=None):
         return self
 
     def transform(self, X):
         X=X.copy()
-        columns = self.variables_to_repeat + self.columns_to_expand
+        columns = self.columns_to_remain + self.columns_to_expand
         X_expanded=pd.DataFrame(columns = columns)
-        columns_to_repeat = self.variables_to_repeat
         for index, row in X.iterrows():
             dict_repeated={}
             print(f'===================== \n We are in iteration {index}')
-            for col in columns_to_repeat:
-                dict_repeated[col]=row[col]
+            for var in self.columns_to_remain:
+                dict_repeated[var]=row[var]
             expanding_length = len(row[self.columns_to_expand[0]])
             for i in range(expanding_length):
                 row_to_append={}
@@ -40,6 +35,7 @@ class ExpanderTransformer(TransformerMixin, BaseEstimator):
 
 
 if __name__=="__main__":
+    # this is only a demo for the transformer
     data={
         "A":['label','ad'],
         "B":['lbl','t'],

@@ -33,14 +33,12 @@ class MfccTransformer(BaseEstimator, TransformerMixin):
             )
             for i in range(self.n_mfcc):
                self.mfccs[f"mfcc_{i+1}"].append(mfcc[i])
-            #self.mfccs.append(mfcc)
         return self
     
     def transform(self, X: pd.DataFrame) -> pd.DataFrame:
         X=X.copy()
         for i in range(self.n_mfcc):
             X[f"mfcc_{i+1}"]=self.mfccs[f"mfcc_{i+1}"]
-        #X["mfcc"]=self.mfccs
         return X
 
 if __name__=="__main__":
