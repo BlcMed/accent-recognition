@@ -15,7 +15,7 @@ def load_audio_files(folder_path, sr):
         audio_data.append(audio)
         label = extract_label(file)
         labels.append(label) 
-        df = pd.DataFrame({'audio': audio_data, 'labels': labels})
+        df = pd.DataFrame({'audio': audio_data, 'label': labels})
     return df
 
 
@@ -29,14 +29,14 @@ def extract_label(file):
 
 def filter_data_based_on_accents(df, considered_accents):
     audio_data=df["audio"]
-    labels=df["labels"]
+    labels=df["label"]
     audio_data_filtered=[]
     labels_filtered=[]
     for i,audio in enumerate(audio_data):
         if labels[i] in considered_accents:
             audio_data_filtered.append(audio)
             labels_filtered.append(labels[i])
-    df = pd.DataFrame({'audio': audio_data_filtered, 'labels': labels_filtered})
+    df = pd.DataFrame({'audio': audio_data_filtered, 'label': labels_filtered})
     return df
 
 

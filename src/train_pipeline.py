@@ -22,12 +22,13 @@ def run_training():
                            min_silence_duration=MIN_SILENCE_DURATION,
                            threshold_percentage=THRESHOLD_PERCENTAGE,
                            hop_length=HOP_LENGTH,
+                           n_mfcc=N_MFCC,
                            frame_length_energy=FRAME_LENGTH_ENERGY,
                            segment_duration=SEGMENT_DURATION,
-                           
+                           segment_overlap=SEGMENT_OVERLAP
                            )
     df_transformed = pipeline.fit_transform(df)
-    df_transformed.to_csv('data/processed/df_transformed.csv')
+    df_transformed.to_csv('data/processed/df_transformed.csv', index = False)
 
 
 if __name__ == "__main__":

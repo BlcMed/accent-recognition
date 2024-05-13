@@ -49,7 +49,7 @@ class SplitSilenceTransformer(BaseEstimator, TransformerMixin):
     
     def transform(self, X: pd.DataFrame) -> pd.DataFrame:
         X=X.copy()
-        audio_data, labels = X["audio"], X["labels"]
+        audio_data, labels = X["audio"], X["label"]
         audio_data_trimmed, labels_trimmed = split_all_audios_by_silence(
             audio_data=audio_data,
             labels=labels,
@@ -59,5 +59,5 @@ class SplitSilenceTransformer(BaseEstimator, TransformerMixin):
             frame_length_energy=self.frame_length_energy,
             hop_length=self.hop_length
         )
-        X = pd.DataFrame({'audio': audio_data_trimmed, 'labels': labels_trimmed})
+        X = pd.DataFrame({'audio': audio_data_trimmed, 'label': labels_trimmed})
         return X
