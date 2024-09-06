@@ -1,7 +1,7 @@
 import pandas as pd
 from sklearn.base import BaseEstimator, TransformerMixin
 from typing import List
-from preprocess_data import split_audio_by_silence
+from ..preprocess_data import split_audio_by_silence
 
 
 def split_all_audios_by_silence(audio_data,
