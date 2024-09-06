@@ -3,17 +3,6 @@ from torch.utils.data import DataLoader, TensorDataset, random_split
 import torch.optim as optim
 import torch.nn as nn
 from .model import model 
-import pandas as pd
-from sklearn.model_selection import train_test_split
-from .load_config import load_constants_from_yaml
-constants = load_constants_from_yaml('constants.yml')
-batch_size = constants["BATCH_SIZE"]
-epochs = constants["EPOCHS"]
-validation_split = constants["VALIDATION_SPLIT"]
-test_size = constants["TEST_SIZE"]
-random_state = constants["RANDOM_STATE"]
-processed_data_path = constants["PROCESSED_DATA_PATH"]
-
 
 def train_model(X_train, y_train, batch_size, epochs, validation_split):
 
@@ -52,12 +41,3 @@ def train_model(X_train, y_train, batch_size, epochs, validation_split):
 
     print("Training complete.")
     return model
-
-if __name__ == "__main__":
-    # load data
-    df = pd.read_csv(processed_data_path+"df_transformed.csv")
-    X = df.drop("label", axis=1)
-    y = df["label"]
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=random_state)
-
-    train_model(X_train.values, y_train.values, batch_size, epochs, validation_split)

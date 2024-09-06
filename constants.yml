@@ -1,4 +1,6 @@
 
+PREPRECESSED_DATA_PATH : "data/processed/transformed_data.csv"
+
 SAMPLING_RATING : 22050
 FRAME_LENGTH_ENERGY : 2048  #512
 THRESHOLD_PERCENTAGE : 0.01  # percentage of max energy
