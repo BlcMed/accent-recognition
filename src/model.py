@@ -1,7 +1,10 @@
 import torch
 import torch.nn as nn
-import torch.optim as optim
-from torch.utils.data import DataLoader, TensorDataset
+from .load_config import load_constants_from_yaml
+constants = load_constants_from_yaml('constants.yml')
+first_layer_neurons = constants["FIRST_LAYER_NEURONS"]
+second_layer_neurons = constants["SECOND_LAYER_NEURONS"]
+input_shape = constants["INPUT_SHAPE"]
 
 class Net(nn.Module):
     def __init__(self, input_shape, first_layer_neurons, second_layer_neurons):
@@ -17,3 +20,5 @@ class Net(nn.Module):
         x = torch.relu(self.fc2(x))
         x = torch.sigmoid(self.output(x))
         return x
+
+model = Net(input_shape, first_layer_neurons, second_layer_neurons)

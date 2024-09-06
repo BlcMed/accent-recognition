@@ -60,7 +60,7 @@ def split_audio_by_silence(
 
 
 # Segment Audio into smaller chunks
-def segment_audio(
+def sedgment_audio(
     audio, sr, duration=0.025, overlap=0.010
 ):  # duration=25ms, overlap=10ms
 
